@@ -1,7 +1,7 @@
+const Kuc = require('kintone-ui-component');
+
 (() => {
   'use strict';
-
-  const canvasSize = { w: 320, h: 240 };
 
   // レコード追加時表示イベント
   const eventsCreateShow = ['app.record.create.show', 'app.record.edit.show'];
@@ -9,12 +9,10 @@
     const spFile = kintone.app.record.getSpaceElement('imageFile');
     const spPreview = kintone.app.record.getSpaceElement('imagePreview');
 
-    let inputFile = document.createElement('input');
-    inputFile.id = 'imageFile';
-    inputFile.innerText = '撮影';
-    inputFile.type = 'file';
-    inputFile.capture = 'enviroment';
-    inputFile.accept = 'image/*';
+    let inputFile = new Kuc.Attachment({
+      id: 'imageFile',
+      label: '添付ファイル',
+    });
 
     let preview = document.createElement('div');
     preview.id = 'preview';
@@ -37,7 +35,7 @@
         fileReader.onload = (e) => {
           img.setAttribute('src', fileReader.result);
           img.setAttribute('id', 'imgPreview');
-          img.setAttribute('width', 250);
+          img.setAttribute('width', 220);
           img.setAttribute(
             'height',
             fileReader.result.height * (img.width / fileReader.result.width)
