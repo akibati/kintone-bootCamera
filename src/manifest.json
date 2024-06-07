@@ -1,0 +1,29 @@
+{
+  "manifest_version": 1,
+  "version": "1.1.0",
+  "type": "APP",
+  "name": {
+    "ja": "カメラ起動プラグイン"
+  },
+  "description": {
+    "ja": "タブレットでカメラを起動して写真を添付ファイルに保存するプラグインです"
+  },
+  "icon": "image/ifn1111.png",
+  "homepage_url": {
+    "ja": ""
+  },
+  "desktop": {
+    "js": ["js/index.js"]
+  },
+  "config": {
+    "html": "html/config.html",
+    "js": ["js/config.js"],
+    "css": ["css/config.css"],
+    "required_params": [
+      "imgFile_filedCode",
+      "imgFile_spaceId",
+      "imgPreview_spaceId",
+      "fileId_filedCode"
+    ]
+  }
+}
