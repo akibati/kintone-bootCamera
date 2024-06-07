@@ -4,10 +4,16 @@
 ((PLUGIN_ID) => {
   'use strict';
 
-  const imgFileFieldCode = 'imgFile';
-  const imageFileSpaceId = 'imageFile';
-  const imagePreviewSpaceId = 'imagePreview';
-  const fileIdFieldCode = 'fileId';
+  // プラグインの設定情報を取得
+  const config = kintone.plugin.app.getConfig(PLUGIN_ID) || {};
+  if (Object.keys(config).length === 0) {
+    return;
+  }
+
+  const imgFileFieldCode = config.imgFile_filedCode;
+  const imageFileSpaceId = config.imgFile_spaceId;
+  const imagePreviewSpaceId = config.imgPreview_spaceId;
+  const fileIdFieldCode = config.fileId_filedCode;
 
   // レコード追加時表示イベント
   const eventsCreateShow = ['app.record.create.show', 'app.record.edit.show'];
