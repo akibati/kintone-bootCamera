@@ -3,7 +3,7 @@ const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = {
   mode: isDev ? 'development' : 'production',
-  entry: './src/app/index.js',
+  entry: './src/js/index.js',
   // webpack 5 を利用していて、IE 対応する場合は以下のコメントを外す
   // target: ['web', 'es5'],
   output: {

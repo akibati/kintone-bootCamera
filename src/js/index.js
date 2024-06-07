@@ -1,18 +1,32 @@
-const Kuc = require('kintone-ui-component');
+// jQuery.noConflict();
+// const Kuc = require('kintone-ui-component');
 
-(() => {
+((PLUGIN_ID) => {
   'use strict';
+
+  const imgFileFieldCode = 'imgFile';
+  const imageFileSpaceId = 'imageFile';
+  const imagePreviewSpaceId = 'imagePreview';
+  const fileIdFieldCode = 'fileId';
 
   // レコード追加時表示イベント
   const eventsCreateShow = ['app.record.create.show', 'app.record.edit.show'];
   kintone.events.on(eventsCreateShow, (event) => {
-    const spFile = kintone.app.record.getSpaceElement('imageFile');
-    const spPreview = kintone.app.record.getSpaceElement('imagePreview');
+    const spFile = kintone.app.record.getSpaceElement(imageFileSpaceId);
+    const spPreview = kintone.app.record.getSpaceElement(imagePreviewSpaceId);
 
+    /*
     let inputFile = new Kuc.Attachment({
       id: 'imageFile',
       label: '添付ファイル',
     });
+    */
+    let inputFile = document.createElement('input');
+    inputFile.id = 'imageFile';
+    inputFile.innerText = '撮影';
+    inputFile.type = 'file';
+    inputFile.capture = 'enviroment';
+    inputFile.accept = 'image/*';
 
     let preview = document.createElement('div');
     preview.id = 'preview';
@@ -49,7 +63,7 @@ const Kuc = require('kintone-ui-component');
     spFile.appendChild(inputFile);
     spPreview.appendChild(preview);
 
-    event.record['fileId'].disabled = true;
+    event.record[fileIdFieldCode].disabled = true;
 
     return event;
   });
@@ -64,8 +78,8 @@ const Kuc = require('kintone-ui-component');
       app: kintone.app.getId(),
       id: event.record['$id'].value,
       record: {
-        imgFile: {
-          value: [{ fileKey: event.record['fileId'].value }],
+        [imgFileFieldCode]: {
+          value: [{ fileKey: event.record[fileIdFieldCode].value }],
         },
       },
       __REQUEST_TOKEN__: kintone.getRequestToken(),
@@ -95,8 +109,8 @@ const Kuc = require('kintone-ui-component');
     if (xmlHttp.status === 200) {
       key = JSON.parse(xmlHttp.responseText).fileKey;
     }
-    record.record['fileId'].value = key;
+    record.record[fileIdFieldCode].value = key;
 
     kintone.app.record.set(record);
   }
-})();
+})(kintone.$PLUGIN_ID);
