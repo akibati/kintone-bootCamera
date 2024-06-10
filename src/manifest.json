@@ -1,0 +1,32 @@
+{
+  "manifest_version": 1,
+  "version": "1.1.0",
+  "type": "APP",
+  "name": {
+    "ja": "タブレット用カメラ起動プラグイン",
+    "en": "boot camera for tablet"
+  },
+  "description": {
+    "ja": "タブレットでカメラを起動して写真を添付ファイルに保存するプラグインです",
+    "en": "test"
+  },
+  "icon": "image/ifn1111.png",
+  "homepage_url": {
+    "ja": "https://github.com/akibati/kintone-bootCamera",
+    "en": "https://github.com/akibati/kintone-bootCamera"
+  },
+  "desktop": {
+    "js": ["js/index.js"]
+  },
+  "config": {
+    "html": "html/config.html",
+    "js": ["js/config.js"],
+    "css": ["css/config.css"],
+    "required_params": [
+      "imgFile_filedCode",
+      "imgFile_spaceId",
+      "imgPreview_spaceId",
+      "fileId_filedCode"
+    ]
+  }
+}
