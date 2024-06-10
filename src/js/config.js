@@ -1,4 +1,4 @@
-((PLUGIN_ID) => {
+(async (PLUGIN_ID) => {
   'use strict';
 
   // エスケープ処理
@@ -12,9 +12,6 @@
       .replace(/\n/g, '&#xA;');
   };
 
-  // プラグイン設定情報を取得
-  const config = kintone.plugin.app.getConfig(PLUGIN_ID);
-
   //設定画面のフォーム情報を取得
   const imgFile_filedCode_FormData =
     document.getElementById('imgFile-fieldCode');
@@ -22,6 +19,9 @@
   const imgPreview_spaceId_FormData =
     document.getElementById('imgPreview-spaceId');
   const fileId_filedCode_FormData = document.getElementById('fileId-fieldCode');
+
+  // プラグイン設定情報を取得
+  const config = kintone.plugin.app.getConfig(PLUGIN_ID);
 
   // プラグインの設定情報に値があれば初期値として表示
   imgFile_filedCode_FormData.value = config.imgFile_filedCode || '';
@@ -34,10 +34,10 @@
   // 保存
   const saveButton = document.getElementById('submit');
   saveButton.addEventListener('click', () => {
-    const imgFile_filedCode = imgFile_filedCode_FormData.value;
-    const imgFile_spaceId = imgFile_spaceId_FormData.value;
-    const imgPreview_spaceId = imgPreview_spaceId_FormData.value;
-    const fileId_filedCode = fileId_filedCode_FormData.value;
+    const imgFile_filedCode = escapeHtml(imgFile_filedCode_FormData.value);
+    const imgFile_spaceId = escapeHtml(imgFile_spaceId_FormData.value);
+    const imgPreview_spaceId = escapeHtml(imgPreview_spaceId_FormData.value);
+    const fileId_filedCode = escapeHtml(fileId_filedCode_FormData.value);
 
     if (
       imgFile_filedCode === '' ||
